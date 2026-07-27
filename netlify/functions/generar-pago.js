@@ -3,7 +3,7 @@ const crypto = require('crypto');
 const SECRET_KEY    = '+FBv/qS9vwsDZPgZu/CWFUOaS9XGrRbW';
 const MERCHANT_CODE = '370476756';
 const TERMINAL      = '001';
-const AMOUNT        = '1000';
+const AMOUNT        = '1500';
 const CURRENCY      = '978';
 const REDSYS_URL    = 'https://sis.redsys.es/sis/realizarPago';
 

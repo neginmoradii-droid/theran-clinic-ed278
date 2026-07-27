@@ -1,17 +1,18 @@
 functionsDirectory = "/Users/neginmoradi/Documents/THERAN/netlify/functions"
-functionsDirectoryOrigin = "default"
+functionsDirectoryOrigin = "config"
 plugins = []
 headers = []
 redirects = []
 
 [build]
 publish = "/Users/neginmoradi/Documents/THERAN/dist"
-publishOrigin = "ui"
-commandOrigin = "ui"
+publishOrigin = "config"
+commandOrigin = "config"
 command = "npm run build"
 functions = "/Users/neginmoradi/Documents/THERAN/netlify/functions"
 
 [build.environment]
+NODE_VERSION = "18"
 
 [build.processing]
 
@@ -28,3 +29,4 @@ functions = "/Users/neginmoradi/Documents/THERAN/netlify/functions"
 [functions]
 
 [functions."*"]
+node_bundler = "esbuild"

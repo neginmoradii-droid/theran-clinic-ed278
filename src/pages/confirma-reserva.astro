@@ -35,7 +35,7 @@ import Layout from '../layouts/Layout.astro';
         </div>
         <p id="pago-error" class="pago-error" hidden></p>
         <button type="submit" class="btn-confirmar" id="btn-confirmar">
-          Confirma la cita — 10&nbsp;€
+          Confirma la cita — 15&nbsp;€
         </button>
       </form>
 
@@ -47,7 +47,7 @@ import Layout from '../layouts/Layout.astro';
       </form>
 
       <div class="pago-info">
-        <p>Para garantizar tu espacio en agenda, realizamos una reserva de <strong>10&nbsp;€</strong> que se descuenta íntegramente del tratamiento el día de la visita.</p>
+        <p>Para garantizar tu espacio en agenda, realizamos una reserva de <strong>15&nbsp;€</strong> que se descuenta íntegramente del tratamiento el día de la visita.</p>
         <p class="politica"><strong>Política de cancelación:</strong> la reserva no es reembolsable si se cancela o modifica la cita con menos de 24 horas de antelación, ni en caso de no asistencia.</p>
         <p>Una vez completado el pago recibirás confirmación por correo electrónico.</p>
       </div>
@@ -94,7 +94,7 @@ import Layout from '../layouts/Layout.astro';
       errEl.textContent = err.message || 'Error de conexión. Inténtalo de nuevo.';
       errEl.hidden = false;
       btn.disabled = false;
-      btn.textContent = 'Confirma la cita — 10 €';
+      btn.textContent = 'Confirma la cita — 15 €';
     }
   });
 </script>
