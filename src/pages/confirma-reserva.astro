@@ -1,0 +1,238 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Confirma tu cita — THERAN Clinic">
+  <section class="pago-section">
+    <div class="pago-card">
+      <p class="pago-eyebrow">Reserva de cita</p>
+      <h1 class="pago-titulo">Confirma tu cita<br>en THERAN Clinic</h1>
+
+      <div class="pago-metodos">
+        <span>💳 Tarjeta</span>
+        <span class="sep">·</span>
+        <span>
+          <svg viewBox="0 0 60 24" height="15" style="vertical-align:middle;margin-right:2px;" xmlns="http://www.w3.org/2000/svg">
+            <text y="18" font-size="18" font-weight="bold" fill="#00AFFE" font-family="Arial,sans-serif">B</text>
+            <text x="14" y="18" font-size="13" font-weight="bold" fill="#555" font-family="Arial,sans-serif">izum</text>
+          </svg>
+        </span>
+      </div>
+
+      <!-- Formulario datos cliente -->
+      <form id="theran-form" autocomplete="on" novalidate>
+        <div class="campo">
+          <label for="nombre">Nombre completo</label>
+          <input type="text" id="nombre" name="nombre" required placeholder="Tu nombre y apellido" autocomplete="name">
+        </div>
+        <div class="campo">
+          <label for="email">Correo electrónico</label>
+          <input type="email" id="email" name="email" required placeholder="tu@email.com" autocomplete="email">
+        </div>
+        <div class="campo">
+          <label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" required placeholder="6XX XXX XXX" autocomplete="tel">
+        </div>
+        <p id="pago-error" class="pago-error" hidden></p>
+        <button type="submit" class="btn-confirmar" id="btn-confirmar">
+          Confirma la cita — 15&nbsp;€
+        </button>
+      </form>
+
+      <!-- Formulario oculto → Redsys -->
+      <form id="redsys-form" method="POST" style="display:none">
+        <input type="hidden" name="Ds_SignatureVersion"   value="HMAC_SHA256_V1">
+        <input type="hidden" name="Ds_MerchantParameters" id="r_params">
+        <input type="hidden" name="Ds_Signature"          id="r_sig">
+      </form>
+
+      <div class="pago-info">
+        <p>Para garantizar tu espacio en agenda, realizamos una reserva de <strong>15&nbsp;€</strong> que se descuenta íntegramente del tratamiento el día de la visita.</p>
+        <p class="politica"><strong>Política de cancelación:</strong> la reserva no es reembolsable si se cancela o modifica la cita con menos de 24 horas de antelación, ni en caso de no asistencia.</p>
+        <p>Una vez completado el pago recibirás confirmación por correo electrónico.</p>
+      </div>
+
+      <p class="pago-seguro">🔒 Pago seguro procesado por BBVA</p>
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form   = document.getElementById('theran-form') as HTMLFormElement;
+  const btn    = document.getElementById('btn-confirmar') as HTMLButtonElement;
+  const errEl  = document.getElementById('pago-error') as HTMLParagraphElement;
+  const rForm  = document.getElementById('redsys-form') as HTMLFormElement;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    errEl.hidden = true;
+    btn.disabled = true;
+    btn.textContent = 'Procesando…';
+
+    const nombre   = (document.getElementById('nombre') as HTMLInputElement).value.trim();
+    const email    = (document.getElementById('email') as HTMLInputElement).value.trim();
+    const telefono = (document.getElementById('telefono') as HTMLInputElement).value.trim();
+
+    try {
+      const res  = await fetch('/.netlify/functions/generar-pago', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, email, telefono }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || 'Error del servidor');
+      }
+
+      rForm.action = data.url;
+      (document.getElementById('r_params') as HTMLInputElement).value = data.params_b64;
+      (document.getElementById('r_sig') as HTMLInputElement).value    = data.signature;
+      rForm.submit();
+
+    } catch (err: any) {
+      errEl.textContent = err.message || 'Error de conexión. Inténtalo de nuevo.';
+      errEl.hidden = false;
+      btn.disabled = false;
+      btn.textContent = 'Confirma la cita — 15 €';
+    }
+  });
+</script>
+
+<style>
+  .pago-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 24px 60px;
+    background: #f8f6f3;
+  }
+  .pago-card {
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 40px rgba(0,0,0,0.07);
+    padding: 52px 48px;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+  }
+  .pago-eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 16px;
+  }
+  .pago-titulo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 1.3;
+    color: #1a1a1a;
+    margin: 0 0 20px;
+  }
+  .pago-metodos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    color: #777;
+    margin-bottom: 32px;
+  }
+  .sep { color: #ddd; }
+
+  .campo {
+    text-align: left;
+    margin-bottom: 16px;
+  }
+  .campo label {
+    display: block;
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #555;
+    margin-bottom: 6px;
+  }
+  .campo input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    font-family: 'Jost', sans-serif;
+    font-size: 15px;
+    color: #222;
+    box-sizing: border-box;
+    background: #fafafa;
+    transition: border-color 0.2s;
+  }
+  .campo input:focus {
+    border-color: #1a1a1a;
+    outline: none;
+    background: #fff;
+  }
+
+  .pago-error {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    color: #c0392b;
+    margin-bottom: 12px;
+    text-align: left;
+  }
+
+  .btn-confirmar {
+    width: 100%;
+    padding: 16px;
+    background: #1a1a1a;
+    color: #fff;
+    border: none;
+    border-radius: 1px;
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 4px;
+  }
+  .btn-confirmar:hover:not(:disabled) { background: #333; }
+  .btn-confirmar:disabled { background: #999; cursor: not-allowed; }
+
+  .pago-info {
+    margin-top: 32px;
+    text-align: left;
+    border-top: 1px solid #f0ede9;
+    padding-top: 28px;
+  }
+  .pago-info p {
+    font-family: 'Jost', sans-serif;
+    font-size: 13px;
+    color: #777;
+    line-height: 1.8;
+    margin: 0 0 14px;
+  }
+  .politica {
+    background: #f8f6f3;
+    border-left: 2px solid #c9a96e;
+    padding: 10px 14px;
+    font-size: 12px !important;
+  }
+
+  .pago-seguro {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    color: #bbb;
+    margin-top: 24px;
+    margin-bottom: 0;
+    letter-spacing: 0.05em;
+  }
+
+  @media (max-width: 540px) {
+    .pago-card { padding: 40px 24px; }
+    .pago-titulo { font-size: 24px; }
+  }
+</style>

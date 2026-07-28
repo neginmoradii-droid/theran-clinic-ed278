@@ -1,0 +1,80 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Error en el pago — THERAN Clinic">
+  <section class="resultado-section">
+    <div class="resultado-card">
+      <div class="icono">✕</div>
+      <p class="eyebrow">Pago no completado</p>
+      <h1>El pago no se ha procesado</h1>
+      <p class="texto">Ha ocurrido un error y no hemos podido procesar el pago. Por favor, inténtalo de nuevo o contáctanos directamente.</p>
+      <a href="/confirma-reserva" class="btn-reintentar">Intentar de nuevo</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .resultado-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 120px 24px 60px;
+    background: #f8f6f3;
+  }
+  .resultado-card {
+    background: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 40px rgba(0,0,0,0.07);
+    padding: 52px 48px;
+    max-width: 440px;
+    width: 100%;
+    text-align: center;
+  }
+  .icono {
+    width: 64px; height: 64px;
+    border-radius: 50%;
+    background: #fdecea;
+    color: #c62828;
+    font-size: 24px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 24px;
+  }
+  .eyebrow {
+    font-family: 'Jost', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 12px;
+  }
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 0 0 20px;
+  }
+  .texto {
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    color: #777;
+    line-height: 1.8;
+    margin: 0 0 32px;
+  }
+  .btn-reintentar {
+    display: inline-block;
+    padding: 13px 32px;
+    background: #1a1a1a;
+    color: #fff;
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 1px;
+    transition: background 0.2s;
+  }
+  .btn-reintentar:hover { background: #333; }
+</style>
