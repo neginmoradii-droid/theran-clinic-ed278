@@ -4,69 +4,69 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="Consentimiento Informado Corporal — THERAN Clinic">
   <section class="consent-section">
-    <div class="consent-card">
+    <header class="consent-header">
       <p class="eyebrow">Documentación clínica</p>
-      <h1>Consentimiento Informado<br>Tratamiento Corporal</h1>
-      <p class="subtexto">Por favor, lee y firma el documento antes de tu cita en THERAN Clinic.</p>
-      <div class="form-wrap">
-        <iframe
-          title="CI-Corporal-Theran-Clinic"
-          src="https://www.jotform.com/sign/262363699858074/invite/01m0wnbyf5c5acc95dbbad7af6?signEmbed=1"
-          style="height:700px; width:100%; border:0; border-radius:4px;"
-          loading="lazy"
-        ></iframe>
-      </div>
+      <h1>Consentimiento Informado · Tratamiento Corporal</h1>
+    </header>
+    <div class="form-wrap">
+      <iframe
+        title="CI-Corporal-Theran-Clinic"
+        src="https://www.jotform.com/sign/262363699858074/invite/01m0wnbyf5c5acc95dbbad7af6?signEmbed=1"
+        allow="fullscreen"
+        loading="lazy"
+      ></iframe>
     </div>
   </section>
 </Layout>
 
 <style>
   .consent-section {
-    min-height: 100vh;
     display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 120px 24px 60px;
+    flex-direction: column;
+    height: 100vh;
+    height: 100dvh;
+    padding-top: 88px;
     background: #f8f6f3;
+    box-sizing: border-box;
   }
-  .consent-card {
-    background: #fff;
-    border-radius: 2px;
-    box-shadow: 0 2px 40px rgba(0,0,0,0.07);
-    padding: 48px 40px;
-    max-width: 540px;
-    width: 100%;
+  .consent-header {
+    flex: 0 0 auto;
     text-align: center;
+    padding: 20px 24px 16px;
   }
   .eyebrow {
     font-family: 'Jost', sans-serif;
-    font-size: 11px;
+    font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #999;
-    margin: 0 0 14px;
+    color: #aaa;
+    margin: 0 0 6px;
   }
   h1 {
     font-family: 'Cormorant Garamond', serif;
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 400;
     line-height: 1.3;
     color: #1a1a1a;
-    margin: 0 0 14px;
-  }
-  .subtexto {
-    font-family: 'Jost', sans-serif;
-    font-size: 13px;
-    color: #888;
-    line-height: 1.7;
-    margin: 0 0 32px;
+    margin: 0;
   }
   .form-wrap {
+    flex: 1 1 auto;
+    min-height: 0;
     width: 100%;
-    overflow: hidden;
   }
-  @media (max-width: 540px) {
-    .consent-card { padding: 40px 16px; }
-    h1 { font-size: 22px; }
+  .form-wrap iframe {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .consent-section { padding-top: 72px; }
+    .consent-header { padding: 14px 16px 10px; }
+    h1 { font-size: 17px; }
+    .eyebrow { font-size: 9px; }
   }
 </style>
