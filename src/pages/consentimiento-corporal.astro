@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Consentimiento Informado - Tratamientos Corporales — THERAN">
+  <section class="consent-section">
+    <div class="consent-container">
+      <div class="consent-header">
+        <h1>Consentimiento Informado</h1>
+        <p class="subtitle">Tratamientos Corporales</p>
+      </div>
+
+      <div class="consent-form">
+        <iframe
+          title="CI-Corporal-Theran-Clinic"
+          src="https://www.jotform.com/sign/262363699858074/invite/01m0wnbyf5c5acc95dbbad7af6?signEmbed=1"
+          style="height:600px; width: 100%; max-width: 600px; border: 0;"
+          allow="geolocation; microphone; camera">
+        </iframe>
+      </div>
+
+      <div class="consent-info">
+        <p><strong>¿Qué es esto?</strong></p>
+        <p>Este formulario de consentimiento informado es necesario antes de realizar cualquier tratamiento corporal en THERAN. Contiene información importante sobre los procedimientos, riesgos y beneficios.</p>
+        <p><strong>¿Qué necesitas?</strong></p>
+        <p>Completa el formulario con tus datos y firma digitalmente. Una vez enviado, recibirás una copia por correo electrónico.</p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .consent-section {
+    min-height: 100vh;
+    padding: 120px 24px 60px;
+    background: linear-gradient(135deg, #f8f6f3 0%, #fafaf8 100%);
+  }
+
+  .consent-container {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .consent-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .consent-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 400;
+    color: #1a1a1a;
+    margin: 0 0 8px;
+  }
+
+  .consent-header .subtitle {
+    font-family: 'Jost', sans-serif;
+    font-size: 16px;
+    color: #999;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .consent-form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 48px;
+    background: white;
+    border-radius: 2px;
+    padding: 24px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .consent-info {
+    background: white;
+    padding: 32px;
+    border-radius: 2px;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  }
+
+  .consent-info p {
+    font-family: 'Jost', sans-serif;
+    font-size: 14px;
+    color: #666;
+    line-height: 1.8;
+    margin: 0 0 16px;
+  }
+
+  .consent-info p:last-child {
+    margin-bottom: 0;
+  }
+
+  .consent-info strong {
+    color: #1a1a1a;
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .consent-section {
+      padding: 80px 16px 40px;
+    }
+
+    .consent-header h1 {
+      font-size: 28px;
+    }
+
+    .consent-form {
+      padding: 16px;
+    }
+
+    .consent-info {
+      padding: 20px;
+    }
+  }
+</style>
