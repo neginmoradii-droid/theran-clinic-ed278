@@ -1,4 +1,4 @@
-import crypto from 'crypto';
+const crypto = require('crypto');
 
 const SECRET_KEY    = '+FBv/qS9vwsDZPgZu/CWFUOaS9XGrRbW';
 const MERCHANT_CODE = '370476756';
@@ -41,7 +41,7 @@ const CORS = {
   'Content-Type': 'application/json',
 };
 
-export const handler = async (event) => {
+exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers: CORS, body: '' };
   }
