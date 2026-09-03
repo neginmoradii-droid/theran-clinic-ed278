@@ -1,4 +1,4 @@
-const crypto = require('crypto');
+import crypto from 'node:crypto';
 
 const SECRET_KEY    = '+FBv/qS9vwsDZPgZu/CWFUOaS9XGrRbW';
 const MERCHANT_CODE = '370476756';
@@ -41,7 +41,7 @@ const CORS = {
   'Content-Type': 'application/json',
 };
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers: CORS, body: '' };
   }
@@ -78,7 +78,7 @@ exports.handler = async (event) => {
     DS_MERCHANT_URLOK:              `${urlBase}/reserva-confirmada/`,
     DS_MERCHANT_URLKO:              `${urlBase}/reserva-error/`,
     DS_MERCHANT_MERCHANTNAME:       'THERAN Clinic',
-    DS_MERCHANT_PRODUCTDESCRIPTION: 'Depósito reserva cita - 10€',
+    DS_MERCHANT_PRODUCTDESCRIPTION: 'Depósito reserva cita - 15€',
     DS_MERCHANT_TITULAR:            nombre,
     DS_MERCHANT_MERCHANTDATA:       merchantData,
   };

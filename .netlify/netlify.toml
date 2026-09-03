@@ -12,7 +12,7 @@ command = "npm run build"
 functions = "/Users/neginmoradi/Documents/THERAN/netlify/functions"
 
 [build.environment]
-NODE_VERSION = "18"
+NODE_VERSION = "22"
 
 [build.processing]
 
